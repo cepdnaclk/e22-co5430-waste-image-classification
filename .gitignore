@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Data and models
+data/raw/
+data/processed/
+models/
+*.pt
+*.pth
+*.ckpt
+
+# Results that can be regenerated
+results/figures/*.png
+results/figures/*.jpg
+results/tables/*.csv
+
+# System files
+.DS_Store
+
+# Notebooks
+.ipynb_checkpoints/
