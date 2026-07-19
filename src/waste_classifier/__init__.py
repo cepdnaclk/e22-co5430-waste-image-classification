@@ -1,0 +1,1 @@
+"""Waste image classification package."""
