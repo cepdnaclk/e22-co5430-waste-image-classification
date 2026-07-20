@@ -103,6 +103,22 @@ Run the full Phase 1 audit with:
 python scripts/audit_dataset.py --data-dir data/raw --output-dir docs/phase1
 ```
 
+## Phase 2 Outputs
+
+Phase 2 creates a stratified train, validation, and test split.
+
+Main files:
+
+- `scripts/split_dataset.py`
+- `docs/phase2/phase2_split_report_v1.md`
+- `docs/phase2/split_counts_v1.csv`
+
+Run the split with:
+
+```bash
+python scripts/split_dataset.py --data-dir data/raw --output-dir data/processed/splits --report-dir docs/phase2 --seed 42
+```
+
 ## AI Use Note
 
 AI tools may be used for planning, writing support, code suggestions, and debugging. All code and results must be reviewed and understood by the team.
