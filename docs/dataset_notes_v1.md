@@ -12,7 +12,7 @@ Creator listed on Kaggle: Mostafa Mohamed
 
 ## Classes
 
-The dataset contains 12 waste classes:
+The dataset contains 12 waste classes. In our downloaded folder, the battery class is named `battery`.
 
 - paper
 - cardboard
@@ -24,7 +24,7 @@ The dataset contains 12 waste classes:
 - white-glass
 - clothes
 - shoes
-- batteries
+- battery
 - trash
 
 ## License Note
@@ -47,3 +47,27 @@ Possible issues:
 - Backgrounds may affect prediction.
 
 We will mention these limitations in the final report.
+
+## Local Dataset Audit
+
+The dataset was copied from:
+
+```text
+/Users/bhaveenthankajanikanth/Downloads/garbage_classification
+```
+
+to:
+
+```text
+data/raw/
+```
+
+Phase 1 audit result:
+
+- Class folders: 12
+- Readable image files: 15,515
+- Unreadable image files: 0
+- File type: JPG
+- Main image modes: RGB and a small number of P-mode images
+
+The local count is 15,515 images. The proposal mentioned approximately 15,150 images based on the dataset page text. In the project report, we should use the local audit count when describing our actual experiments.

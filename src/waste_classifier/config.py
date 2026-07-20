@@ -27,6 +27,6 @@ CLASS_NAMES = [
     "white-glass",
     "clothes",
     "shoes",
-    "batteries",
+    "battery",
     "trash",
 ]
