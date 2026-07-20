@@ -1,0 +1,13 @@
+{
+  "data_dir": "data/raw",
+  "class_count": 12,
+  "total_readable_images": 15515,
+  "bad_file_count": 0,
+  "extensions": {
+    ".jpg": 15515
+  },
+  "image_modes": {
+    "RGB": 15481,
+    "P": 34
+  }
+}

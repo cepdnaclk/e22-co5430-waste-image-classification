@@ -18,6 +18,10 @@ results/figures/*.png
 results/figures/*.jpg
 results/tables/*.csv
 
+# Local work files
+work/
+docs/phase1/dataset_inventory_v1.csv
+
 # System files
 .DS_Store
 

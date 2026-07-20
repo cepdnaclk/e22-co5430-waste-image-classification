@@ -1,0 +1,13 @@
+class_name,image_count,min_width,max_width,min_height,max_height
+battery,945,140,456,110,306
+biological,985,156,450,112,324
+brown-glass,607,125,512,120,400
+cardboard,891,160,512,126,384
+clothes,5325,400,888,400,936
+green-glass,629,110,512,142,400
+metal,769,150,512,106,384
+paper,1050,159,512,100,384
+plastic,865,140,512,146,384
+shoes,1977,153,790,119,867
+trash,697,51,381,132,400
+white-glass,775,114,512,133,400

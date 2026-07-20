@@ -17,7 +17,7 @@ We use the Kaggle Garbage Classification dataset:
 
 https://www.kaggle.com/datasets/mostafaabla/garbage-classification
 
-The dataset has about 15,150 labelled images from these classes:
+The Kaggle page describes the dataset as a 12-class household waste image dataset. The local copy used in this project has 15,515 readable JPG images.
 
 - paper
 - cardboard
@@ -29,7 +29,7 @@ The dataset has about 15,150 labelled images from these classes:
 - white-glass
 - clothes
 - shoes
-- batteries
+- battery
 - trash
 
 The full dataset is not committed to this repository. Download it from Kaggle and place it inside:
@@ -82,6 +82,26 @@ python scripts/check_dataset.py --data-dir data/raw
 ```
 
 This prints the class names and image counts. It helps us confirm that the dataset is in the expected format.
+
+## Phase 1 Outputs
+
+Phase 1 prepares and checks the dataset before model training.
+
+Main files:
+
+- `docs/phase1/phase1_learning_report_v1.md`
+- `docs/phase1/dataset_audit_table_v1.md`
+- `docs/phase1/class_counts_v1.csv`
+- `docs/phase1/planned_split_counts_v1.csv`
+- `docs/phase1/images/class_counts_v1.png`
+- `docs/phase1/images/image_sizes_v1.png`
+- `docs/phase1/images/sample_grid_v1.jpg`
+
+Run the full Phase 1 audit with:
+
+```bash
+python scripts/audit_dataset.py --data-dir data/raw --output-dir docs/phase1
+```
 
 ## AI Use Note
 
