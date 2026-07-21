@@ -1,0 +1,13 @@
+actual/predicted,battery,biological,brown-glass,cardboard,clothes,green-glass,metal,paper,plastic,shoes,trash,white-glass
+battery,60,3,0,0,6,3,0,4,3,4,6,1
+biological,0,38,11,7,19,9,1,2,1,1,1,0
+brown-glass,4,12,34,7,13,0,7,2,5,5,0,1
+cardboard,1,5,2,55,11,1,0,2,4,1,1,7
+clothes,3,7,0,2,68,1,0,7,1,1,0,0
+green-glass,1,6,0,1,0,76,0,2,3,0,1,0
+metal,5,5,3,5,19,3,4,11,19,1,13,2
+paper,8,4,0,2,23,1,1,27,15,1,0,8
+plastic,3,0,0,3,8,2,2,7,40,0,20,5
+shoes,23,8,5,2,33,1,0,7,1,6,4,0
+trash,5,0,0,1,6,0,4,1,12,0,60,1
+white-glass,2,1,1,4,5,0,1,9,20,1,45,1
