@@ -4,6 +4,8 @@ Group G20 - Project P04
 
 This project classifies household waste images into 12 waste classes. The goal is to build a clear computer vision pipeline, compare a simple baseline with improved models, and explain the results with proper evaluation.
 
+![Realistic waste items for classification](docs/phase5/images/waste_items_realistic_v1.png)
+
 ## Team
 
 - E/22/051
@@ -70,8 +72,8 @@ flowchart LR
 ```mermaid
 flowchart TD
     A["Phase 3: color histogram baseline"] --> B["Phase 4: small CNN"]
-    B --> C["Phase 5: MobileNetV2 / EfficientNet-B0"]
-    C --> D["Phase 6: augmentation study"]
+    B --> C["Phase 5: augmentation study"]
+    C --> D["Phase 6: MobileNetV2 / EfficientNet-B0"]
     D --> E["Phase 7: final test evaluation"]
     E --> F["Phase 8: Grad-CAM and demo app"]
 ```
@@ -202,6 +204,43 @@ Training curve:
 Confusion matrix:
 
 ![CNN confusion matrix](docs/phase4/images/cnn_confusion_matrix_v1.png)
+
+## Phase 5 Outputs
+
+Phase 5 checks whether augmentation improves the CNN model.
+
+Augmentation means we slightly change training images. The model sees more variety, while the label stays the same.
+
+Main files:
+
+- `docs/phase5/phase5_augmentation_report_v1.md`
+- `docs/phase5/augmentation_comparison_v1.csv`
+- `docs/phase5/images/augmentation_preview_v1.jpg`
+- `docs/phase5/images/augmentation_metric_comparison_v1.png`
+- `docs/phase5/images/waste_items_realistic_v1.png`
+- `docs/phase5/with_aug/cnn_metrics_v1.csv`
+- `docs/phase5/with_aug/cnn_history_v1.csv`
+
+Run the augmentation experiment with:
+
+```bash
+python scripts/train_cnn.py --split-dir data/processed/splits --output-dir docs/phase5/with_aug --model-path models/small_cnn_aug_v1.pt --epochs 8 --batch-size 64 --image-size 96 --max-train 0 --max-val 0 --max-train-per-class 350 --max-val-per-class 90 --augment --report-file-name phase5_with_aug_cnn_report_v1.md
+```
+
+Phase 5 result:
+
+| Model | Augmentation | Validation accuracy | Macro F1-score |
+|---|---|---:|---:|
+| Small CNN | No | 0.4343 | 0.3950 |
+| Small CNN | Yes | 0.4407 | 0.3992 |
+
+Augmentation preview:
+
+![Augmentation preview](docs/phase5/images/augmentation_preview_v1.jpg)
+
+Metric comparison:
+
+![Augmentation metric comparison](docs/phase5/images/augmentation_metric_comparison_v1.png)
 
 ## AI Use Note
 
