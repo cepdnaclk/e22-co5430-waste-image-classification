@@ -51,6 +51,31 @@ We will do the project in this order:
 7. Generate Grad-CAM examples for correct and wrong predictions.
 8. Build a small image upload demo if the main experiments are complete.
 
+## Project Workflow
+
+```mermaid
+flowchart LR
+    A["Kaggle waste images"] --> B["Dataset audit"]
+    B --> C["Train/validation/test split"]
+    C --> D["Color baseline"]
+    C --> E["Small CNN model"]
+    D --> F["Compare metrics"]
+    E --> F
+    F --> G["Improved transfer models"]
+    G --> H["Final evaluation and demo"]
+```
+
+## Model Roadmap
+
+```mermaid
+flowchart TD
+    A["Phase 3: color histogram baseline"] --> B["Phase 4: small CNN"]
+    B --> C["Phase 5: MobileNetV2 / EfficientNet-B0"]
+    C --> D["Phase 6: augmentation study"]
+    D --> E["Phase 7: final test evaluation"]
+    E --> F["Phase 8: Grad-CAM and demo app"]
+```
+
 ## Folder Structure
 
 ```text
@@ -137,6 +162,46 @@ Run the baseline with:
 ```bash
 python scripts/train_baseline.py --split-dir data/processed/splits --output-dir docs/phase3 --model-path models/baseline_color_hist_v1.joblib
 ```
+
+## Phase 4 Outputs
+
+Phase 4 trains the first deep learning model using plain PyTorch.
+
+This is a small CNN. It learns from image pixels, so it can learn simple shape and texture patterns. It is not yet MobileNetV2 or EfficientNet-B0 because `torchvision` is not available in the current local environment.
+
+The CNN code follows the usual PyTorch `nn.Module` training workflow. Reference: https://docs.pytorch.org/tutorials/recipes/recipes/defining_a_neural_network.html
+
+Main files:
+
+- `scripts/train_cnn.py`
+- `docs/phase4/phase4_cnn_report_v1.md`
+- `docs/phase4/cnn_metrics_v1.csv`
+- `docs/phase4/cnn_class_report_v1.csv`
+- `docs/phase4/cnn_history_v1.csv`
+- `docs/phase4/cnn_confusion_matrix_v1.csv`
+- `docs/phase4/images/cnn_training_curve_v1.png`
+- `docs/phase4/images/cnn_confusion_matrix_v1.png`
+
+Run the CNN model with:
+
+```bash
+python scripts/train_cnn.py --split-dir data/processed/splits --output-dir docs/phase4 --model-path models/small_cnn_v1.pt --epochs 8 --batch-size 64 --image-size 96 --max-train 0 --max-val 0 --max-train-per-class 350 --max-val-per-class 90
+```
+
+Phase 4 result:
+
+| Model | Validation accuracy | Macro F1-score |
+|---|---:|---:|
+| Color histogram baseline | 0.4848 | 0.3928 |
+| Small CNN | 0.4343 | 0.3950 |
+
+Training curve:
+
+![CNN training curve](docs/phase4/images/cnn_training_curve_v1.png)
+
+Confusion matrix:
+
+![CNN confusion matrix](docs/phase4/images/cnn_confusion_matrix_v1.png)
 
 ## AI Use Note
 
