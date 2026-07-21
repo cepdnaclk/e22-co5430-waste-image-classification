@@ -119,6 +119,25 @@ Run the split with:
 python scripts/split_dataset.py --data-dir data/raw --output-dir data/processed/splits --report-dir docs/phase2 --seed 42
 ```
 
+## Phase 3 Outputs
+
+Phase 3 trains the first simple baseline model.
+
+Main files:
+
+- `scripts/train_baseline.py`
+- `docs/phase3/phase3_baseline_report_v1.md`
+- `docs/phase3/baseline_metrics_v1.csv`
+- `docs/phase3/baseline_class_report_v1.csv`
+- `docs/phase3/confusion_matrix_v1.csv`
+- `docs/phase3/images/confusion_matrix_v1.png`
+
+Run the baseline with:
+
+```bash
+python scripts/train_baseline.py --split-dir data/processed/splits --output-dir docs/phase3 --model-path models/baseline_color_hist_v1.joblib
+```
+
 ## AI Use Note
 
 AI tools may be used for planning, writing support, code suggestions, and debugging. All code and results must be reviewed and understood by the team.
