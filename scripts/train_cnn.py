@@ -6,7 +6,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from torch import nn
 from torch.utils.data import DataLoader, Dataset
@@ -58,10 +58,11 @@ def get_font(size=14):
 
 
 class WasteImageDataset(Dataset):
-    def __init__(self, rows, class_to_index, image_size):
+    def __init__(self, rows, class_to_index, image_size, augment=False):
         self.rows = rows
         self.class_to_index = class_to_index
         self.image_size = image_size
+        self.augment = augment
 
     def __len__(self):
         return len(self.rows)
@@ -74,6 +75,8 @@ class WasteImageDataset(Dataset):
         with Image.open(image_path) as image:
             image = ImageOps.exif_transpose(image).convert("RGB")
             image = image.resize((self.image_size, self.image_size))
+            if self.augment:
+                image = apply_augmentation(image)
             array = np.asarray(image, dtype=np.float32) / 255.0
 
         # PyTorch expects channels first: C x H x W.
@@ -81,6 +84,23 @@ class WasteImageDataset(Dataset):
         label = self.class_to_index[class_name]
 
         return tensor, label
+
+
+def apply_augmentation(image):
+    if random.random() < 0.5:
+        image = ImageOps.mirror(image)
+
+    if random.random() < 0.7:
+        angle = random.uniform(-12, 12)
+        image = image.rotate(angle, resample=Image.Resampling.BILINEAR, fillcolor=(255, 255, 255))
+
+    if random.random() < 0.7:
+        brightness = random.uniform(0.85, 1.15)
+        contrast = random.uniform(0.85, 1.15)
+        image = ImageEnhance.Brightness(image).enhance(brightness)
+        image = ImageEnhance.Contrast(image).enhance(contrast)
+
+    return image
 
 
 class SmallCNN(nn.Module):
@@ -328,6 +348,12 @@ def write_report(path, metrics, baseline_metrics, args, train_count, val_count):
     path.parent.mkdir(parents=True, exist_ok=True)
     baseline_accuracy = baseline_metrics.get("accuracy")
     baseline_macro_f1 = baseline_metrics.get("macro_f1")
+    report_title = "Phase 5 CNN With Augmentation Report v1" if args.augment else "Phase 4 CNN Model Report v1"
+    phase_goal = (
+        "In this phase, we trained the small CNN model with augmentation."
+        if args.augment
+        else "In this phase, we trained a small CNN model."
+    )
 
     if baseline_accuracy is None:
         comparison_text = "Baseline metrics were not found during report generation."
@@ -339,11 +365,14 @@ def write_report(path, metrics, baseline_metrics, args, train_count, val_count):
 
 The CNN has lower accuracy than the color baseline, but it slightly improves macro F1-score. Macro F1-score is important here because the dataset is imbalanced and we want each class to matter."""
 
-    text = f"""# Phase 4 CNN Model Report v1
+    output_dir = args.output_dir.as_posix()
+    model_path = args.model_path.as_posix()
 
-## Phase 4 Goal
+    text = f"""# {report_title}
 
-In this phase, we trained a small CNN model.
+## Goal
+
+{phase_goal}
 
 The Phase 3 baseline used only color histograms. This CNN learns directly from image pixels, so it can learn simple shape and texture patterns too.
 
@@ -374,6 +403,7 @@ The test set was not used.
 | Max validation images | {args.max_val or 'full validation split'} |
 | Max train images per class | {args.max_train_per_class or 'not limited'} |
 | Max validation images per class | {args.max_val_per_class or 'not limited'} |
+| Augmentation | {args.augment} |
 
 ## Result
 
@@ -397,13 +427,13 @@ The score is still not high. That means the model needs more training time, pret
 ## Files Created
 
 ```text
-docs/phase4/cnn_metrics_v1.csv
-docs/phase4/cnn_class_report_v1.csv
-docs/phase4/cnn_history_v1.csv
-docs/phase4/cnn_confusion_matrix_v1.csv
-docs/phase4/images/cnn_confusion_matrix_v1.png
-docs/phase4/images/cnn_training_curve_v1.png
-models/small_cnn_v1.pt
+{output_dir}/cnn_metrics_v1.csv
+{output_dir}/cnn_class_report_v1.csv
+{output_dir}/cnn_history_v1.csv
+{output_dir}/cnn_confusion_matrix_v1.csv
+{output_dir}/images/cnn_confusion_matrix_v1.png
+{output_dir}/images/cnn_training_curve_v1.png
+{model_path}
 ```
 
 The model file is local only and ignored by Git.
@@ -424,6 +454,7 @@ def main():
     parser.add_argument("--split-dir", type=Path, default=Path("data/processed/splits"))
     parser.add_argument("--output-dir", type=Path, default=Path("docs/phase4"))
     parser.add_argument("--model-path", type=Path, default=Path("models/small_cnn_v1.pt"))
+    parser.add_argument("--report-file-name", default="phase4_cnn_report_v1.md")
     parser.add_argument("--epochs", type=int, default=2)
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--image-size", type=int, default=96)
@@ -432,6 +463,7 @@ def main():
     parser.add_argument("--max-val", type=int, default=1000)
     parser.add_argument("--max-train-per-class", type=int, default=None)
     parser.add_argument("--max-val-per-class", type=int, default=None)
+    parser.add_argument("--augment", action="store_true")
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
 
@@ -456,8 +488,8 @@ def main():
     class_to_index = {label: index for index, label in enumerate(labels)}
     index_to_class = {index: label for label, index in class_to_index.items()}
 
-    train_dataset = WasteImageDataset(train_rows, class_to_index, args.image_size)
-    val_dataset = WasteImageDataset(val_rows, class_to_index, args.image_size)
+    train_dataset = WasteImageDataset(train_rows, class_to_index, args.image_size, augment=args.augment)
+    val_dataset = WasteImageDataset(val_rows, class_to_index, args.image_size, augment=False)
 
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=0)
     val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False, num_workers=0)
@@ -509,7 +541,7 @@ def main():
     save_confusion_matrix_image(args.output_dir / "images" / "cnn_confusion_matrix_v1.png", labels, matrix)
     save_training_curve(args.output_dir / "images" / "cnn_training_curve_v1.png", history)
     baseline_metrics = read_metrics(Path("docs/phase3/baseline_metrics_v1.csv"))
-    write_report(args.output_dir / "phase4_cnn_report_v1.md", metrics, baseline_metrics, args, len(train_rows), len(val_rows))
+    write_report(args.output_dir / args.report_file_name, metrics, baseline_metrics, args, len(train_rows), len(val_rows))
 
     args.model_path.parent.mkdir(parents=True, exist_ok=True)
     torch.save(

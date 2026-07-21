@@ -1,0 +1,6 @@
+metric,value
+accuracy,0.44074074074074077
+macro_precision,0.40452771903587176
+macro_recall,0.44074074074074066
+macro_f1,0.39920912555331095
+training_seconds,128.32

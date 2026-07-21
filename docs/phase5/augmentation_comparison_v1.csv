@@ -1,0 +1,3 @@
+model,augmentation,validation_accuracy,macro_precision,macro_recall,macro_f1
+small_cnn,no,0.4343,0.4048,0.4343,0.3950
+small_cnn,yes,0.4407,0.4070,0.4407,0.3992
