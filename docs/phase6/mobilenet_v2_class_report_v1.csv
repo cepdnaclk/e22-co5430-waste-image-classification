@@ -1,0 +1,13 @@
+class_name,precision,recall,f1_score,support
+battery,0.0,0.0,0.0,2
+biological,0.0,0.0,0.0,2
+brown-glass,0.0,0.0,0.0,2
+cardboard,0.0833,0.5,0.1429,2
+clothes,0.0,0.0,0.0,2
+green-glass,0.0,0.0,0.0,2
+metal,0.0,0.0,0.0,2
+paper,0.0,0.0,0.0,2
+plastic,0.0,0.0,0.0,2
+shoes,0.0833,0.5,0.1429,2
+trash,0.0,0.0,0.0,2
+white-glass,0.0,0.0,0.0,2

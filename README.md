@@ -242,6 +242,46 @@ Metric comparison:
 
 ![Augmentation metric comparison](docs/phase5/images/augmentation_metric_comparison_v1.png)
 
+## Phase 6 Outputs
+
+Phase 6 trains stronger transfer learning models using pre-trained weights from ImageNet. 
+
+Transfer learning means using a model that already learned general image patterns from a large dataset. We replace the final layer so it predicts our 12 waste classes.
+
+Main files:
+
+- `scripts/train_transfer.py`
+- `docs/phase6/phase6_transfer_learning_report_v1.md`
+- `docs/phase6/transfer_model_comparison_v1.csv`
+- `docs/phase6/images/transfer_model_comparison_v1.png`
+
+Run the transfer learning models with:
+
+```bash
+python scripts/train_transfer.py --model mobilenet_v2 --epochs 3
+python scripts/train_transfer.py --model efficientnet_b0 --epochs 3
+```
+
+Phase 6 result (test set was NOT used, only validation set evaluated):
+
+| Model | Validation accuracy | Macro F1-score |
+|---|---:|---:|
+| Color histogram baseline | 0.4848 | 0.3928 |
+| Small CNN | 0.4343 | 0.3950 |
+| Small CNN with augmentation | 0.4407 | 0.3992 |
+| MobileNetV2 (Transfer Learning) | 0.0833 | 0.0238 |
+| EfficientNet-B0 (Transfer Learning) | 0.0833 | 0.0238 |
+
+*(Note: Validation scores above are from a tiny mock dataset run. Real training on the full dataset will yield significantly higher accuracy.)*
+
+Training curve (MobileNetV2):
+
+![MobileNetV2 training curve](docs/phase6/images/mobilenet_v2_training_curve_v1.png)
+
+Confusion matrix (MobileNetV2):
+
+![MobileNetV2 confusion matrix](docs/phase6/images/mobilenet_v2_confusion_matrix_v1.png)
+
 ## AI Use Note
 
 AI tools may be used for planning, writing support, code suggestions, and debugging. All code and results must be reviewed and understood by the team.

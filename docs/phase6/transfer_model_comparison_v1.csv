@@ -1,0 +1,6 @@
+Model,Validation accuracy,Macro F1-score
+Color histogram baseline,0.4848,0.3928
+Small CNN,0.4343,0.395
+Small CNN with augmentation,0.4407,0.3992
+MobileNetV2 (Transfer Learning),0.08333333333333333,0.023809523809523808
+EfficientNet-B0 (Transfer Learning),0.08333333333333333,0.023809523809523808
