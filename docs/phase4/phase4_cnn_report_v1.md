@@ -1,6 +1,6 @@
 # Phase 4 CNN Model Report v1
 
-## Phase 4 Goal
+## Goal
 
 In this phase, we trained a small CNN model.
 
@@ -33,22 +33,23 @@ The test set was not used.
 | Max validation images | full validation split |
 | Max train images per class | 350 |
 | Max validation images per class | 90 |
+| Augmentation | False |
 
 ## Result
 
 | Metric | Value |
 |---|---:|
-| Validation accuracy | 0.4343 |
-| Macro precision | 0.4048 |
-| Macro recall | 0.4343 |
-| Macro F1-score | 0.3950 |
+| Validation accuracy | 0.4426 |
+| Macro precision | 0.4150 |
+| Macro recall | 0.4426 |
+| Macro F1-score | 0.4032 |
 
 ## Baseline Comparison
 
 | Model | Validation accuracy | Macro F1-score |
 |---|---:|---:|
 | Color histogram baseline | 0.4848 | 0.3928 |
-| Small CNN | 0.4343 | 0.3950 |
+| Small CNN | 0.4426 | 0.4032 |
 
 The CNN has lower accuracy than the color baseline, but it slightly improves macro F1-score. Macro F1-score is important here because the dataset is imbalanced and we want each class to matter.
 

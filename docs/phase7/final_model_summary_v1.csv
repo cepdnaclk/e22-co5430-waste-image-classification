@@ -1,0 +1,2 @@
+model,val_accuracy,val_macro_f1,test_accuracy,test_macro_f1
+mobilenet_v2,0.8927,0.8929,0.9038,0.8648

@@ -258,8 +258,8 @@ Main files:
 Run the transfer learning models with:
 
 ```bash
-python scripts/train_transfer.py --model mobilenet_v2 --epochs 3
-python scripts/train_transfer.py --model efficientnet_b0 --epochs 3
+python scripts/train_transfer.py --model mobilenet_v2 --epochs 5 --batch-size 32 --image-size 224 --max-train-per-class 500 --max-val-per-class 120 --augment
+python scripts/train_transfer.py --model efficientnet_b0 --epochs 5 --batch-size 32 --image-size 224 --max-train-per-class 500 --max-val-per-class 120 --augment
 ```
 
 Phase 6 result (test set was NOT used, only validation set evaluated):
@@ -269,10 +269,8 @@ Phase 6 result (test set was NOT used, only validation set evaluated):
 | Color histogram baseline | 0.4848 | 0.3928 |
 | Small CNN | 0.4343 | 0.3950 |
 | Small CNN with augmentation | 0.4407 | 0.3992 |
-| MobileNetV2 (Transfer Learning) | 0.0833 | 0.0238 |
-| EfficientNet-B0 (Transfer Learning) | 0.0833 | 0.0238 |
-
-*(Note: Validation scores above are from a tiny mock dataset run. Real training on the full dataset will yield significantly higher accuracy.)*
+| MobileNetV2 (Transfer Learning) | 0.8927 | 0.8929 |
+| EfficientNet-B0 (Transfer Learning) | 0.8913 | 0.8909 |
 
 Training curve (MobileNetV2):
 
@@ -282,6 +280,48 @@ Confusion matrix (MobileNetV2):
 
 ![MobileNetV2 confusion matrix](docs/phase6/images/mobilenet_v2_confusion_matrix_v1.png)
 
+## Phase 7 Outputs
+
+Phase 7 evaluates the best model from Phase 6 on the held-out test set. This is the first and only time the test set is used. No training or tuning was done in this phase.
+
+We selected **MobileNetV2** because it had the best validation macro F1-score (0.8929) among the Phase 6 transfer learning models. Macro F1-score gives equal importance to every class, which matters because the dataset is imbalanced.
+
+Main files:
+
+- `scripts/evaluate_final.py`
+- `docs/phase7/phase7_final_evaluation_report_v1.md`
+- `docs/phase7/final_test_metrics_v1.csv`
+- `docs/phase7/final_test_class_report_v1.csv`
+- `docs/phase7/final_test_confusion_matrix_v1.csv`
+- `docs/phase7/final_model_summary_v1.csv`
+
+Run the final evaluation with:
+
+```bash
+python scripts/evaluate_final.py --split-dir data/processed/splits --model-path models/mobilenet_v2_v1.pt --model-name mobilenet_v2 --output-dir docs/phase7
+```
+
+Final test result:
+
+| Metric | Value |
+|---|---:|
+| Test accuracy | 0.9038 |
+| Macro precision | 0.8652 |
+| Macro recall | 0.8688 |
+| Macro F1-score | 0.8648 |
+| Total test images | 2329 |
+
+The test set was used **only** in Phase 7. The model was not changed after seeing test results.
+
+Confusion matrix (test set):
+
+![Test confusion matrix](docs/phase7/images/final_test_confusion_matrix_v1.png)
+
+Result summary (validation vs test):
+
+![Result summary](docs/phase7/images/final_result_summary_v1.png)
+
 ## AI Use Note
 
 AI tools may be used for planning, writing support, code suggestions, and debugging. All code and results must be reviewed and understood by the team.
+

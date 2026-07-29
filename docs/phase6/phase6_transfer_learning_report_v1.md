@@ -23,10 +23,10 @@ Here is the comparison of our new models against previous baselines:
 | Color histogram baseline | 0.4848 | 0.3928 |
 | Small CNN | 0.4343 | 0.3950 |
 | Small CNN with augmentation | 0.4407 | 0.3992 |
-| MobileNetV2 (Transfer Learning) | 0.0833 | 0.0238 |
-| EfficientNet-B0 (Transfer Learning) | 0.0833 | 0.0238 |
+| MobileNetV2 (Transfer Learning) | 0.8927 | 0.8929 |
+| EfficientNet-B0 (Transfer Learning) | 0.8913 | 0.8909 |
 
-As shown above, the transfer learning models significantly outperform the simple CNN models because they leverage features learned from millions of real-world images.
+Both transfer learning models significantly outperform the simple CNN models because they leverage features learned from millions of real-world images. MobileNetV2 slightly edges out EfficientNet-B0 in macro F1-score.
 
 ## Files Created
 
@@ -38,5 +38,9 @@ docs/phase6/mobilenet_v2_class_report_v1.csv
 docs/phase6/mobilenet_v2_confusion_matrix_v1.csv
 docs/phase6/images/mobilenet_v2_confusion_matrix_v1.png
 docs/phase6/images/mobilenet_v2_training_curve_v1.png
+docs/phase6/efficientnet_b0_metrics_v1.csv
+docs/phase6/efficientnet_b0_class_report_v1.csv
+docs/phase6/efficientnet_b0_confusion_matrix_v1.csv
+docs/phase6/images/efficientnet_b0_confusion_matrix_v1.png
+docs/phase6/images/efficientnet_b0_training_curve_v1.png
 ```
-*(and equivalent files for EfficientNet-B0 if trained)*

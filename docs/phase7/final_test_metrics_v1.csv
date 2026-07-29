@@ -1,0 +1,9 @@
+metric,value
+test_accuracy,0.9038
+macro_precision,0.8652
+macro_recall,0.8688
+macro_f1,0.8648
+total_test_images,2329
+model_name,mobilenet_v2
+checkpoint_path,models\mobilenet_v2_v1.pt
+image_size,224
