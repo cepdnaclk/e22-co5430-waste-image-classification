@@ -1,6 +1,6 @@
 # Phase 5 CNN With Augmentation Report v1
 
-## Phase 5 Goal
+## Goal
 
 In this phase, we trained the small CNN model with augmentation.
 
@@ -39,17 +39,17 @@ The test set was not used.
 
 | Metric | Value |
 |---|---:|
-| Validation accuracy | 0.4407 |
-| Macro precision | 0.4045 |
-| Macro recall | 0.4407 |
-| Macro F1-score | 0.3992 |
+| Validation accuracy | 0.4315 |
+| Macro precision | 0.3902 |
+| Macro recall | 0.4315 |
+| Macro F1-score | 0.3888 |
 
 ## Baseline Comparison
 
 | Model | Validation accuracy | Macro F1-score |
 |---|---:|---:|
 | Color histogram baseline | 0.4848 | 0.3928 |
-| Small CNN | 0.4407 | 0.3992 |
+| Small CNN | 0.4315 | 0.3888 |
 
 The CNN has lower accuracy than the color baseline, but it slightly improves macro F1-score. Macro F1-score is important here because the dataset is imbalanced and we want each class to matter.
 
