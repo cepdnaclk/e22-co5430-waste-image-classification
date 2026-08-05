@@ -57,13 +57,7 @@ The improvement is not large, but it is useful. It shows that the model benefits
 
 ![Realistic waste classification visual](images/waste_items_realistic_v1.png)
 
-This generated visual is only used for README/report presentation. It is not used for training or evaluation.
-
-## Figma Note
-
-The Figma connector is available, but it needs a Figma design file key or URL before it can write frames into Figma.
-
-For now, the visual assets are saved in the repository. They can be imported into Figma later.
+This visual is only used for README/report presentation. It is not used for training or evaluation.
 
 ## Files Created
 

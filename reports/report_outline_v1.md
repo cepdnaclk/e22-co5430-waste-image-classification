@@ -71,4 +71,4 @@ Short summary of the problem, method, dataset, main results, and conclusion.
 
 ## References
 
-Add dataset, papers, pretrained model docs, tools, and AI use.
+Add the dataset, related papers, pretrained model documentation, and software tools.
