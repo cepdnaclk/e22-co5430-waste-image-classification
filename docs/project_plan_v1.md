@@ -134,4 +134,4 @@ Use short technical names:
 - Keep code simple and explainable.
 - Add short comments only where they help.
 - Record every result clearly.
-- Cite the dataset, papers, pretrained models, and AI use.
+- Cite the dataset, related papers, pretrained models, and software tools.

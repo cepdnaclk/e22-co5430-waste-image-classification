@@ -1,0 +1,81 @@
+actual_class,predicted_class,count,reason
+white-glass,plastic,28,both can be transparent or shiny in photos
+plastic,metal,12,some plastic and metal items have similar shapes and reflections
+metal,plastic,10,both can appear smooth and bright under indoor lighting
+plastic,paper,10,thin plastic wrappers can look like paper sheets
+shoes,biological,9,some shoe photos contain soil-like colors or textured backgrounds
+cardboard,paper,8,both are flat fibre-based materials
+clothes,shoes,6,these classes share some visual details
+paper,cardboard,6,both are flat fibre-based materials
+plastic,green-glass,6,these classes share some visual details
+clothes,paper,5,these classes share some visual details
+white-glass,metal,5,these classes share some visual details
+clothes,plastic,4,these classes share some visual details
+plastic,white-glass,4,these classes share some visual details
+shoes,clothes,4,these classes share some visual details
+brown-glass,shoes,3,these classes share some visual details
+clothes,biological,3,these classes share some visual details
+metal,biological,3,these classes share some visual details
+metal,brown-glass,3,these classes share some visual details
+metal,shoes,3,these classes share some visual details
+metal,white-glass,3,these classes share some visual details
+shoes,metal,3,these classes share some visual details
+shoes,trash,3,these classes share some visual details
+white-glass,brown-glass,3,these classes share some visual details
+battery,green-glass,2,these classes share some visual details
+battery,trash,2,these classes share some visual details
+brown-glass,green-glass,2,these classes share some visual details
+brown-glass,metal,2,these classes share some visual details
+cardboard,battery,2,these classes share some visual details
+cardboard,clothes,2,these classes share some visual details
+cardboard,shoes,2,these classes share some visual details
+clothes,cardboard,2,these classes share some visual details
+clothes,metal,2,these classes share some visual details
+green-glass,plastic,2,these classes share some visual details
+metal,battery,2,these classes share some visual details
+metal,green-glass,2,these classes share some visual details
+metal,paper,2,these classes share some visual details
+paper,battery,2,these classes share some visual details
+paper,biological,2,these classes share some visual details
+paper,plastic,2,these classes share some visual details
+paper,shoes,2,these classes share some visual details
+paper,white-glass,2,these classes share some visual details
+shoes,brown-glass,2,these classes share some visual details
+shoes,plastic,2,these classes share some visual details
+trash,biological,2,these classes share some visual details
+trash,plastic,2,these classes share some visual details
+white-glass,green-glass,2,these classes share some visual details
+battery,biological,1,these classes share some visual details
+battery,cardboard,1,these classes share some visual details
+battery,metal,1,these classes share some visual details
+battery,paper,1,these classes share some visual details
+biological,cardboard,1,these classes share some visual details
+brown-glass,battery,1,these classes share some visual details
+brown-glass,biological,1,these classes share some visual details
+brown-glass,cardboard,1,these classes share some visual details
+brown-glass,plastic,1,these classes share some visual details
+brown-glass,white-glass,1,these classes share some visual details
+cardboard,biological,1,these classes share some visual details
+cardboard,brown-glass,1,these classes share some visual details
+cardboard,plastic,1,these classes share some visual details
+cardboard,trash,1,these classes share some visual details
+clothes,green-glass,1,these classes share some visual details
+green-glass,biological,1,these classes share some visual details
+green-glass,brown-glass,1,these classes share some visual details
+green-glass,paper,1,these classes share some visual details
+green-glass,white-glass,1,these classes share some visual details
+metal,cardboard,1,these classes share some visual details
+metal,clothes,1,these classes share some visual details
+metal,trash,1,these classes share some visual details
+paper,clothes,1,these classes share some visual details
+paper,metal,1,these classes share some visual details
+plastic,brown-glass,1,these classes share some visual details
+plastic,clothes,1,these classes share some visual details
+plastic,trash,1,these classes share some visual details
+shoes,white-glass,1,these classes share some visual details
+trash,cardboard,1,these classes share some visual details
+trash,white-glass,1,these classes share some visual details
+white-glass,battery,1,these classes share some visual details
+white-glass,clothes,1,these classes share some visual details
+white-glass,paper,1,these classes share some visual details
+white-glass,trash,1,these classes share some visual details
