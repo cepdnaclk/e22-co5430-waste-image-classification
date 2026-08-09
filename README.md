@@ -55,6 +55,7 @@ flowchart LR
     G --> H["Final test evaluation"]
     H --> I["Error analysis"]
     I --> J["Grad-CAM explanation"]
+    J --> K["Web app demo"]
 ```
 
 ## Current Result
@@ -180,6 +181,28 @@ Run Grad-CAM:
 python3 scripts/generate_gradcam.py --split-dir data/processed/splits --model-path models/mobilenet_v2_v1.pt --model-name mobilenet_v2 --output-dir docs/phase9
 ```
 
+## Web App Demo (Phase 11)
+
+A simple Streamlit demo app lets you upload a waste image and see the MobileNetV2 prediction in the browser.
+
+```bash
+streamlit run app/app.py
+```
+
+Or:
+
+```bash
+python3 -m streamlit run app/app.py
+```
+
+The app opens at `http://localhost:8501`.
+
+The trained model checkpoint is not committed to GitHub. Place `mobilenet_v2_v1.pt` inside `models/` to enable predictions. The app still opens without the checkpoint and shows a clear message.
+
+See [app/README.md](app/README.md) for full instructions.
+
+![Web app screenshot](docs/phase11/images/web_app_screenshot_v1.png)
+
 ## Phase Outputs
 
 | Phase | Main output |
@@ -193,3 +216,4 @@ python3 scripts/generate_gradcam.py --split-dir data/processed/splits --model-pa
 | Phase 7 | Final test evaluation |
 | Phase 8 | Error analysis |
 | Phase 9 | Grad-CAM explainability script |
+| Phase 11 | Streamlit web app demo |
