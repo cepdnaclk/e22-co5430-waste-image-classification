@@ -83,24 +83,185 @@ def predict(model, index_to_class, image_size, image: Image.Image):
 # ── page config ────────────────────────────────────────────────────────────────
 
 st.set_page_config(
-    page_title="Waste Image Classification Demo",
+    page_title="Waste Image Classification",
     page_icon="♻️",
     layout="centered",
 )
 
+# ── custom styles ──────────────────────────────────────────────────────────────
+
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+}
+
+/* ── page background ── */
+.stApp {
+    background: linear-gradient(135deg, #0f0c29 0%, #1a1a2e 40%, #16213e 100%);
+    min-height: 100vh;
+}
+
+/* ── hero header block ── */
+.hero-block {
+    background: linear-gradient(135deg, #1a6b3a 0%, #0d9488 50%, #0ea5e9 100%);
+    border-radius: 18px;
+    padding: 2.2rem 2rem 1.8rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 32px rgba(14,165,233,0.25);
+    text-align: center;
+}
+.hero-block h1 {
+    color: #ffffff;
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin: 0 0 0.3rem 0;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.hero-block .sub {
+    color: rgba(255,255,255,0.78);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.9rem;
+}
+.hero-block .desc {
+    color: rgba(255,255,255,0.9);
+    font-size: 0.97rem;
+    line-height: 1.65;
+    max-width: 560px;
+    margin: 0 auto;
+}
+.hero-block .desc b {
+    color: #a7f3d0;
+}
+
+/* ── stat pills row ── */
+.stat-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 1.1rem;
+    flex-wrap: wrap;
+}
+.stat-pill {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 30px;
+    padding: 0.28rem 0.9rem;
+    font-size: 0.78rem;
+    color: #fff;
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+}
+
+/* ── warning / success banners ── */
+.stAlert {
+    border-radius: 12px !important;
+    border: none !important;
+}
+div[data-baseweb="notification"] {
+    border-radius: 12px;
+}
+
+/* ── file uploader zone ── */
+[data-testid="stFileUploadDropzone"] {
+    background: linear-gradient(135deg, rgba(14,165,233,0.07), rgba(16,185,129,0.07)) !important;
+    border: 2px dashed rgba(14,165,233,0.45) !important;
+    border-radius: 14px !important;
+    transition: border-color 0.25s, background 0.25s;
+}
+[data-testid="stFileUploadDropzone"]:hover {
+    border-color: #0ea5e9 !important;
+    background: linear-gradient(135deg, rgba(14,165,233,0.13), rgba(16,185,129,0.13)) !important;
+}
+
+/* ── section label above uploader ── */
+[data-testid="stFileUploaderLabel"] {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: #e2e8f0 !important;
+    margin-bottom: 0.4rem;
+}
+
+/* ── prediction label headers ── */
+h4 {
+    color: #a7f3d0 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px;
+}
+
+/* ── class badge inside prediction ── */
+.class-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #0d9488, #0ea5e9);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    padding: 0.35rem 1.1rem;
+    margin: 0.3rem 0 0.6rem 0;
+    box-shadow: 0 4px 14px rgba(14,165,233,0.3);
+}
+
+/* ── progress bars ── */
+[role="progressbar"] > div {
+    background: linear-gradient(90deg, #0d9488, #0ea5e9) !important;
+    border-radius: 6px !important;
+}
+
+/* ── expander ── */
+[data-testid="stExpander"] {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 12px !important;
+}
+[data-testid="stExpander"] summary {
+    font-weight: 600;
+    color: #cbd5e1 !important;
+}
+
+/* ── image rounded ── */
+[data-testid="stImage"] img {
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* ── divider ── */
+[data-testid="stDivider"] hr {
+    border-color: rgba(255,255,255,0.08) !important;
+}
+
+/* ── general text ── */
+p, li, label {
+    color: #cbd5e1;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # ── title & description ────────────────────────────────────────────────────────
 
-st.title("♻️ Waste Image Classification Demo")
-st.caption("CO5430 Computer Vision · Group G20 · Project P04")
-
-st.markdown(
-    """
-    Upload a photo of a waste item and the app will predict which of the
-    **12 waste categories** it belongs to.  
-    The model is **MobileNetV2** fine-tuned with transfer learning
-    (test accuracy 90.4 %, macro F1 0.865).
-    """
-)
+st.markdown("""
+<div class="hero-block">
+    <h1>♻️ Waste Image Classification</h1>
+    <p class="sub">CO5430 Computer Vision &nbsp;·&nbsp; Group G20 &nbsp;·&nbsp; Project P04</p>
+    <p class="desc">
+        Upload a photo of a waste item and the app will predict which of the
+        <b>12 waste categories</b> it belongs to.<br>
+        Powered by <b>MobileNetV2</b> fine-tuned with transfer learning.
+    </p>
+    <div class="stat-row">
+        <span class="stat-pill">🎯 Test Accuracy 90.4%</span>
+        <span class="stat-pill">📊 Macro F1 0.865</span>
+        <span class="stat-pill">🗂️ 12 Classes</span>
+        <span class="stat-pill">🖼️ 15,515 Images</span>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # ── model loading ──────────────────────────────────────────────────────────────
 
@@ -137,7 +298,11 @@ if uploaded_file is not None:
 
     with col_info:
         if not model_ready:
-            st.info("Upload is shown above. Add the model checkpoint to get predictions.")
+            st.warning(
+                "⚠️ **Model checkpoint not found.**  \n"
+                "Place `mobilenet_v2_v1.pt` inside the `models/` folder to run predictions.",
+                icon="📁",
+            )
         else:
             with st.spinner("Predicting…"):
                 ranked = predict(model, index_to_class, image_size, image)
@@ -146,7 +311,7 @@ if uploaded_file is not None:
 
             # ── top prediction ──
             st.markdown("#### Prediction")
-            st.markdown(f"**{top_class.upper()}**")
+            st.markdown(f'<div class="class-badge">{top_class.upper()}</div>', unsafe_allow_html=True)
             st.progress(top_prob, text=f"Confidence: {top_prob * 100:.1f} %")
 
             # ── disposal note ──
