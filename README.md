@@ -55,6 +55,7 @@ flowchart LR
     G --> H["Final test evaluation"]
     H --> I["Error analysis"]
     I --> J["Grad-CAM explanation"]
+    J --> K["Web app demo"]
 ```
 
 ## Current Result
@@ -131,10 +132,32 @@ src/               Small shared project config.
 Create a Python environment and install the required packages:
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
 If your terminal uses `python3`, run scripts with `python3`.
+
+## Reproducibility Notes
+
+The repository keeps code, reports, charts, and small result images. The dataset and trained model files are not committed because they are large.
+
+To reproduce the project:
+
+1. Download the Kaggle dataset and place the class folders inside `data/raw/`.
+2. Run the dataset check and split scripts.
+3. Train the models using the commands below.
+4. Keep trained checkpoints inside `models/`.
+5. Run final evaluation, error analysis, Grad-CAM, and the web app demo.
+
+Expected local model path for the final demo:
+
+```text
+models/mobilenet_v2_v1.pt
+```
+
+This file is needed for prediction, but it should stay local.
 
 ## Main Commands
 
@@ -180,6 +203,37 @@ Run Grad-CAM:
 python3 scripts/generate_gradcam.py --split-dir data/processed/splits --model-path models/mobilenet_v2_v1.pt --model-name mobilenet_v2 --output-dir docs/phase9
 ```
 
+Run the web app:
+
+```bash
+python3 -m streamlit run app/app.py
+```
+
+## Web App Demo (Phase 11)
+
+A simple Streamlit demo app lets the user upload a waste image and see the MobileNetV2 prediction in the browser.
+
+The trained model checkpoint is not committed to GitHub. Place `mobilenet_v2_v1.pt` inside `models/` to enable predictions. The app should still open without the checkpoint and show a clear message.
+
+See [app/README.md](app/README.md) for full instructions.
+
+![Web app screenshot](docs/phase11/images/web_app_screenshot_v1.png)
+
+## Result Examples
+
+Useful figures for the report and final presentation:
+
+| Figure | Purpose |
+|---|---|
+| `docs/phase1/images/sample_grid_v1.jpg` | Shows example images from the dataset |
+| `docs/phase1/images/class_counts_v1.png` | Shows class imbalance |
+| `docs/phase6/images/transfer_model_comparison_v1.png` | Compares transfer learning models |
+| `docs/phase7/images/final_test_confusion_matrix_v1.png` | Shows final test confusions |
+| `docs/phase7/images/failure_examples_v1.jpg` | Shows qualitative failure cases |
+| `docs/phase8/images/per_class_f1_v1.png` | Shows weak and strong classes |
+| `docs/phase9/images/gradcam_correct_grid_v1.jpg` | Shows Grad-CAM examples for correct predictions |
+| `docs/phase9/images/gradcam_wrong_grid_v1.jpg` | Shows Grad-CAM examples for wrong predictions |
+
 ## Phase Outputs
 
 | Phase | Main output |
@@ -193,3 +247,19 @@ python3 scripts/generate_gradcam.py --split-dir data/processed/splits --model-pa
 | Phase 7 | Final test evaluation |
 | Phase 8 | Error analysis |
 | Phase 9 | Grad-CAM explainability script |
+| Phase 11 | Streamlit web app demo |
+
+## References and Tools
+
+- Dataset: Kaggle Garbage Classification dataset, https://www.kaggle.com/datasets/mostafaabla/garbage-classification
+- Pretrained models: PyTorch Torchvision MobileNetV2 and EfficientNet-B0 ImageNet weights.
+- Main libraries: Python, PyTorch, Torchvision, scikit-learn, Pillow, NumPy, Matplotlib, Seaborn, Streamlit.
+- Development support: AI tools were used for planning, writing support, code suggestions, and debugging. All outputs were reviewed and edited by the team.
+
+## Final Submission Checklist
+
+- Final report in IEEE format, recommended 6-8 pages.
+- GitHub repository updated with code, setup steps, results, and documentation.
+- Final presentation slides for a 7-10 minute recorded presentation/demo.
+- Recorded presentation/demo link or file.
+- Individual contribution statement for all four members.

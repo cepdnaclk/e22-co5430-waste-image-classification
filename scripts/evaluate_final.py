@@ -67,7 +67,7 @@ def read_manifest(path):
 
 
 # ---------------------------------------------------------------------------
-# Dataset — same preprocessing as Phase 6
+# Dataset - same preprocessing as Phase 6
 # ---------------------------------------------------------------------------
 
 class WasteImageDataset(Dataset):
@@ -92,7 +92,7 @@ class WasteImageDataset(Dataset):
             array = np.asarray(image, dtype=np.float32) / 255.0
 
         tensor = torch.from_numpy(array).permute(2, 0, 1)
-        # ImageNet normalization — exactly as in Phase 6
+        # ImageNet normalization - exactly as in Phase 6
         tensor = TF.normalize(
             tensor,
             mean=[0.485, 0.456, 0.406],
@@ -103,7 +103,7 @@ class WasteImageDataset(Dataset):
 
 
 # ---------------------------------------------------------------------------
-# Model builder — same architecture as Phase 6
+# Model builder - same architecture as Phase 6
 # ---------------------------------------------------------------------------
 
 def build_model(model_name, num_classes):
@@ -227,7 +227,7 @@ def save_result_summary_chart(path, model_name, val_f1, test_f1):
     font = get_font(14)
     small_font = get_font(12)
 
-    draw.text((50, 20), f"Final Result Summary — {model_name}", fill="#111827", font=title_font)
+    draw.text((50, 20), f"Final Result Summary - {model_name}", fill="#111827", font=title_font)
 
     bar_left = 180
     bar_max_width = 350
@@ -502,7 +502,7 @@ def main():
     test_loader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=0)
 
     # ------------------------------------------------------------------
-    # 4. Run inference — no training, no gradients
+    # 4. Run inference - no training, no gradients
     # ------------------------------------------------------------------
     all_preds = []
     all_actuals = []
